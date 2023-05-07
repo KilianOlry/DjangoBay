@@ -1,0 +1,53 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Boutique{% endblock title %}
+
+{% block banniere %}{% endblock banniere %}
+
+
+{% block content %}
+
+<div
+	class="bg-purple-900 absolute top-[60px] left-0 bg-gradient-to-b from-cyan-500 to-blue-500 bottom-0 leading-5 h-full w-full overflow-hidden">
+</div>
+<div
+	class="relative   min-h-screen  sm:flex sm:flex-row  justify-center bg-transparent rounded-3xl shadow-xl">
+	<div class="flex justify-center self-center  z-10">
+		<div class="p-12 bg-white mx-auto rounded-3xl w-96 ">
+			<div class="mb-7">
+				<h3 class="font-semibold text-2xl text-gray-800">Connexion</h3>
+				<p class="text-gray-400">Vous n'avez pas encore de compte <a href="#"
+						class="text-sm text-blue-700">Inscription</a></p>
+			</div>
+			<form method="post" action"." class="space-y-6">
+				<div class="">
+					<input class=" w-full text-sm  px-4 py-3 bg-gray-200 focus:bg-gray-100 border  border-gray-200 rounded-lg focus:outline-none focus:border-purple-400" type="" placeholder="Email">
+                </div>
+
+					<div class="relative">
+						<input placeholder="Mot de passe" class="text-sm text-gray-200 px-4 py-3 rounded-lg w-full bg-gray-200 focus:bg-gray-100 border border-gray-200 focus:outline-none focus:border-purple-400">
+                        <div class="p-1 bg-red-400 text-white rounded-xl">
+                            <p>Erreur</p>
+                        </div>
+                    </div>
+
+					<div class="flex items-center justify-between">
+
+						<div class="text-sm ml-auto">
+							<a href="#" class="text-blue-700">
+								Mot de passe oublié ?
+							</a>
+						</div>
+					</div>
+						<button type="submit" class="w-full flex justify-center bg-cyan-500  hover:bg-blue-700 text-gray-100 p-3  rounded-lg tracking-wide font-semibold  cursor-pointer transition ease-in duration-500">
+                Connexion
+              </button>
+            </form>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+
+<svg class="absolute bottom-0 left-0 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#fff" fill-opacity="1" d="M0,0L40,42.7C80,85,160,171,240,197.3C320,224,400,192,480,154.7C560,117,640,75,720,74.7C800,75,880,117,960,154.7C1040,192,1120,224,1200,213.3C1280,203,1360,149,1400,122.7L1440,96L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path></svg>
+{% endblock content %}
