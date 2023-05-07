@@ -18,7 +18,11 @@
                 <p class="mt-6 text-gray-700">{{product.description}}</p>
             {% endif %}
 
-            <a href="#" class="mt-6 inline-block px-8 py-4 rounded-xl bg-cyan-500 text-white hover:bg-cyan-800">
+            <a href="#" class="mt-6 inline-block px-8 py-4 rounded-xl bg-cyan-500 text-white hover:bg-cyan-800"
+                hx-get="{%url 'add_to_cart' product.id %}"
+                hx-target="#menu-cart-button"
+                hx-swap="outerHTML"
+            >
                 Ajouter au panier
             </a>
         </div>
