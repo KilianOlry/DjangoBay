@@ -20,15 +20,32 @@
 						class="text-sm text-blue-700">Inscription</a></p>
 			</div>
 			<form method="post" action"." class="space-y-6">
+				{% csrf_token %}
 				<div class="">
-					<input class=" w-full text-sm  px-4 py-3 bg-gray-200 focus:bg-gray-100 border  border-gray-200 rounded-lg focus:outline-none focus:border-purple-400" type="" placeholder="Email">
+					<input class=" w-full text-sm  px-4 py-3 bg-gray-200 focus:bg-gray-100 border  border-gray-200 rounded-lg focus:outline-none focus:border-purple-400" type="text" name="username" placeholder="Pseudo">
                 </div>
 
 					<div class="relative">
-						<input placeholder="Mot de passe" class="text-sm text-gray-200 px-4 py-3 rounded-lg w-full bg-gray-200 focus:bg-gray-100 border border-gray-200 focus:outline-none focus:border-purple-400">
-                        <div class="p-1 bg-red-400 text-white rounded-xl">
-                            <p>Erreur</p>
-                        </div>
+						<input placeholder="Mot de passe" type="password" name="password1" class="text-sm text-gray-200 px-4 py-3 rounded-lg w-full bg-gray-200 focus:bg-gray-100 border border-gray-200 focus:outline-none focus:border-purple-400">
+							{% if form.errors %}
+							{% for field in form %}
+								{% for error in field.errors %}
+						
+					<div class="p-1 bg-red-500 text-white rounded-xl">
+						<p>{{error|escape}}</p>
+					</div>
+								{% endfor %}
+							{% endfor %}
+
+							{% for error in form.non_field_errors %}
+							
+							<div class="p-1 bg-red-500 text-white rounded-xl">
+								<p>{{error|escape}}</p>
+							</div>
+
+							{% endfor %}
+						{% endif %}
+
                     </div>
 
 					<div class="flex items-center justify-between">

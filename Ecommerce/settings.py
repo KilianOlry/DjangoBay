@@ -25,6 +25,9 @@ SECRET_KEY = 'django-insecure-*xnvc)=@5$&5z!u-r02yp%a6%e(mkz!0x8=h4!0gu645nfgvvb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+LOGOUT_REDIRECT_URL ='/'
+LOGIN_REDIRECT_URL = '/'
+
 ALLOWED_HOSTS = []
 
 SESSION_COOKIE_AGE = 86400

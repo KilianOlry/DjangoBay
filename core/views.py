@@ -1,9 +1,14 @@
+from django.contrib.auth import login
 from django.db.models import Q
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # On importe les données du model
 
 from product.models import Products, Category
+
+
+#on importe le forumalire pour l'auth
+from .forms import SignUpForm
 
 def frontpage(request):
     products = Products.objects.all()[0:8]
@@ -13,12 +18,25 @@ def frontpage(request):
 
 # creation de compte
 def signup(request):
-    return render(request, 'core/signup.html')
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+
+        if form.is_valid():
+            user = form.save()
+
+            login(request, user)
+
+            return redirect('/')
+        
+    else:
+        form = SignUpForm()
+
+    return render(request, 'core/signup.html', {'form': form})
 
 
 # connexion
 
-def login(request):
+def login_old(request):
     return render(request, 'core/login.html')
 
 def shop(request):
