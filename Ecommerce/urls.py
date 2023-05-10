@@ -4,15 +4,21 @@ from django.contrib import admin
 from django.contrib.auth import views
 from django.urls import path
 
-from cart.views import add_to_cart
+from cart.views import add_to_cart, cart, checkout
 from core.views import frontpage, shop, signup, login_old
 from product.views import product
 
 urlpatterns = [
+
+    # Page principal
     path('', frontpage, name='frontpage'),
     path('shop/', shop, name='shop'),
     path('shop/<slug:slug>/', product, name='product'),
+
+    # remplir le pannier
     path('add_to_cart/<int:product_id>/', add_to_cart, name='add_to_cart'),
+    path('cart/', cart, name='cart'),
+    path('cart/checkout/', checkout, name='checkout'),
 
     # Auth
     path('admin/', admin.site.urls),
