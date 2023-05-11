@@ -1,6 +1,6 @@
 {% extends 'core/base.html' %}
 
-{% block title %}Boutique{% endblock title %}
+{% block title %}Connexion{% endblock title %}
 
 {% block banniere %}{% endblock banniere %}
 
@@ -16,7 +16,7 @@
 		<div class="p-12 bg-white mx-auto rounded-3xl w-96 ">
 			<div class="mb-7">
 				<h3 class="font-semibold text-2xl text-gray-800">Connexion</h3>
-				<p class="text-gray-400">Vous n'avez pas encore de compte <a href="#"
+				<p class="text-gray-400">Vous n'avez pas encore de compte <a href="{%url 'signup'%}"
 						class="text-sm text-blue-700">Inscription</a></p>
 			</div>
 			<form method="post" action"." class="space-y-6">
