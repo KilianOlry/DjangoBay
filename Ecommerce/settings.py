@@ -27,6 +27,7 @@ DEBUG = True
 
 LOGOUT_REDIRECT_URL ='/'
 LOGIN_REDIRECT_URL = '/'
+LOGIN_URL ='/login/'
 
 ALLOWED_HOSTS = []
 

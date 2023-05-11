@@ -18,6 +18,13 @@ class Cart(object):
         for p in self.cart.keys():
             self.cart[str(p)]['product'] = Products.objects.get(pk=p)
 
+
+# Pour afficher les données dans le tempates cart.html
+        for item in self.cart.values():
+            item['total_price'] = item['product'].price * item['quantity']
+
+            yield item
+
     def __len__(self):
         return sum(item['quantity'] for item in self.cart.values())
 
@@ -45,3 +52,11 @@ class Cart(object):
     def remove(self, product_id):
         if product_id in self.cart:
             del self.cart[product_id]
+
+
+# function pour le prix total
+    def get_total_cost(self):
+        for p in self.cart.keys():
+            self.cart[str(p)]['product'] = Products.objects.get(pk=p)
+
+        return sum(item['product'].price * item['quantity'] for item in self.cart.values())
