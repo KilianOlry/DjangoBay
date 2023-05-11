@@ -1,0 +1,44 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Modifier_vos_informations{% endblock title %}
+
+{% block banniere %}{% endblock banniere %}
+
+
+{% block content %}
+
+    <div class="max-w-6xl mx-auto p-6">
+        <h1 class="mb-5 text-3xl">Modifier vos informations</h1>
+
+       <form action="." method="post" class="space-y-3">
+        {% csrf_token %}
+            <div>
+                <label>Prénom</label>
+                <input type="text" name="first_name" value="{{request.user.first_name}}" class="w-full mt-2 py-4 px-6 bg-gray-100 rounded-xl">
+            </div>
+
+            <div>
+                <label>Nom</label>
+                <input type="text" name="last_name" value="{{request.user.last_name}}" class="w-full mt-2 py-4 px-6 bg-gray-100 rounded-xl">
+            </div>
+
+            <div>
+                <label>Pseudo</label>
+                <input type="text" name="username" value="{{request.user.username}}" class="w-full mt-2 py-4 px-6 bg-gray-100 rounded-xl">
+            </div>
+
+            <div>
+                <label>Email</label>
+                <input type="email" name="email" value="{{request.user.email}}" class="w-full mt-2 py-4 px-6 bg-gray-100 rounded-xl">
+            </div>
+
+            <div>
+                <button class="py-4 px-6 rounded-xl text-white bg-cyan-500">Valider</button>
+            </div>
+       </form>
+
+    </div>
+
+{% endblock content %}
+
+

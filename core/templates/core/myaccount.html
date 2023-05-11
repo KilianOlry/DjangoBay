@@ -1,0 +1,111 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Mon compte{% endblock title %}
+
+{% block banniere %}{% endblock banniere %}
+
+
+{% block content %}
+
+    <div class="max-w-6xl mx-auto p-6">
+        <h1 class="mb-5 text-3xl">Mon compte</h1>
+
+        <div class="mb-6">
+            <strong>Nom complet : </strong> {{request.user.get_full_name}} <br>
+            <strong>Pseudo : </strong> {{request.user.username}} <br>
+            <strong>Email : </strong> {{request.user.email}} <br>
+
+            <a href="{% url 'edit_myaccount' %}" class=" inline-block mt-5 rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-600 p-2">Modifier</a>
+
+        </div>
+
+        <hr>
+
+        <h2 class="my-6 text-xl">My orders</h2>
+
+        <div class="w-full mb-6 p-6 flex flex-wrap bg-gray-100 rounded-xl">
+            
+            <div class="mb-6 flex justify-between">
+                <a href="#">Order id : 1</a>
+            </div>
+
+
+            <div class="mb-6 w-full">
+                <div class="product mb-6 flex pr-6">
+                    <a href="" class="w-1/4">
+                        <img src="" class="hover:shadow-lg rounded-xl" alt="">
+                    </a>
+                    <div class="w-3/4 pl-6">
+                        <div class="flex justify-between">
+                            <a href="" class="text-lg">Nom du Produit</a>
+
+                            <p class="mb-6 pt-1 text-gray-400"> 9.99€</p>
+                        </div>
+
+                        <hr>
+
+                        <div class="mt-6 ">
+                            Quantity : 1
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="mb-6 w-full">
+                <div class="product mb-6 flex pr-6">
+                    <a href="" class="w-1/4">
+                        <img src="" class="hover:shadow-lg rounded-xl" alt="">
+                    </a>
+                    <div class="w-3/4 pl-6">
+                        <div class="flex justify-between">
+                            <a href="" class="text-lg">Nom du Produit</a>
+
+                            <p class="mb-6 pt-1 text-gray-400"> 9.99€</p>
+                        </div>
+
+                        <hr>
+
+                        <div class="mt-6 ">
+                            Quantity : 1
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="mb-6 w-full">
+                <div class="product mb-6 flex pr-6">
+                    <a href="" class="w-1/4">
+                        <img src="" class="hover:shadow-lg rounded-xl" alt="">
+                    </a>
+                    <div class="w-3/4 pl-6">
+                        <div class="flex justify-between">
+                            <a href="" class="text-lg">Nom du Produit</a>
+
+                            <p class="mb-6 pt-1 text-gray-400"> 9.99€</p>
+                        </div>
+
+                        <hr>
+
+                        <div class="mt-6 ">
+                            Quantity : 1
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div>
+                <p class="text-lg">Date 23/05/2023</p>
+                <p class="text-lg">Total : 9.99€</p>
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock content %}
+
+
