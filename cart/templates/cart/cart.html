@@ -16,31 +16,7 @@
 
       <div class="rounded-lg md:w-2/3">
         {% for item in cart %}
-        <div class="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
-          <img src="{{ item.product.get_thumbnail }}" alt="product-image" class="w-full rounded-lg sm:w-40" />
-          <div class="sm:ml-4 sm:flex sm:w-full sm:justify-between">
-
-            <div class="mt-5 sm:mt-0">
-              <h2 class="text-lg font-bold text-gray-900">{{item.product.name}}</h2>
-            </div>
-
-            <div class="mt-4 flex justify-between sm:space-y-6 sm:mt-0 sm:block sm:space-x-6">
-
-              <div class="flex items-center border-gray-100">
-                <a href="#" class="cursor-pointer rounded-l bg-gray-100 py-1 px-3.5 duration-100 hover:bg-blue-500 hover:text-blue-50">-</a>
-                <span class="h-8 w-8 border bg-white text-center text-xs outline-none flex items-center justify-center">{{item.quantity}}</span>
-                <a href="#" class="cursor-pointer rounded-l bg-gray-100 py-1 px-3.5 duration-100 hover:bg-blue-500 hover:text-blue-50">+</a>
-              </div>
-
-              <div class="flex items-center space-x-4">
-                <p class="text-sm">{{item.total_price}} €</p>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 cursor-pointer duration-150 hover:text-red-500">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
+          {% include 'cart/partials/cart_item.html' %}
         {% endfor %}
       </div>
 
@@ -50,7 +26,13 @@
         <div class="flex justify-between">
           <p class="text-lg font-bold">Total</p>
           <div class="">
-            <p class="mb-1 text-lg font-bold">{{cart.get_total_cost}} €</p>
+            <p class="mb-1 text-lg font-bold"
+                hx-get="{% url 'hx_cart_total' %}"
+                hx-trigger="update-menu-cart from:body"
+                hx-swap="innerHTML">
+
+                {% include 'cart/partials/cart_total.html' %}
+            </p>
           </div>
         </div>
         <a href="{% url 'checkout' %}" class="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-600 p-2">Valider le panier</a>

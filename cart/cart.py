@@ -41,7 +41,7 @@ class Cart(object):
             self.cart[product_id] = {'quantity': 1, 'id': product_id}
 
         if update_quantity:
-            self.cart['product_id'] += int(quantity)
+            self.cart[product_id]['quantity'] += int(quantity)
 
             if self.cart[product_id]['quantity'] == 0:
                 self.remove(product_id)
@@ -59,4 +59,9 @@ class Cart(object):
         for p in self.cart.keys():
             self.cart[str(p)]['product'] = Products.objects.get(pk=p)
 
-        return sum(item['product'].price * item['quantity'] for item in self.cart.values())
+        return int(sum(item['product'].price * item['quantity'] for item in self.cart.values()))
+    
+
+    
+    def get_item(self, product_id):
+        return self.cart[str(product_id)]
