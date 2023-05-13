@@ -52,6 +52,12 @@ class Cart(object):
     def remove(self, product_id):
         if product_id in self.cart:
             del self.cart[product_id]
+            self.save()
+
+    # vider le panier une fois paiement effectuer
+    def clear(self):
+        del self.session[settings.CART_SESSION_ID]
+        self.session.modified= True
 
 
 # function pour le prix total

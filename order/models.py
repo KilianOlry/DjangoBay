@@ -30,9 +30,21 @@ class Order(models.Model):
 
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=ORDERED)
 
+    class Meta:
+        ordering = ('-created_at',)
+
+    def get_total_price(self):
+        if self.paid_amount:
+            return self.paid_amount
+        
+        return 0
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE)
     product = models.ForeignKey(Products, related_name='items', on_delete=models.CASCADE)
     price = models.IntegerField()
     quantity = models.IntegerField(default=1)
+
+# Pour afficher le prix dans les order
+    def get_total_price(self):
+        return self.price 
