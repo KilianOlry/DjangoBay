@@ -13,8 +13,7 @@
           <div class="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
             <div class="max-w-md mx-auto">
 
-                <form action="{% url 'start_order'%}" method="post">
-                  {% csrf_token %}
+
                 <div class="block pl-2 font-semibold text-xl self-start text-gray-700">
                   <h2 class="leading-relaxed">Veuillez entrer vos informations personnels</h2>
                 </div>
@@ -88,11 +87,99 @@
                 <p class="mb-1 text-lg font-bold">{{cart.get_total_cost}} €</p>
               </div>
             </div>
-            <button class="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-600">Valider le panier</button>
+            <button onclick="buy(event)"
+            class="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-600">Valider le panier</button>
           </div>
-        </form>
+
         </div>
       </div>
       </div>
 
 {% endblock content %}
+
+{% block scripts %}
+  <script type="application/javascript" src="https://js.stripe.com/v3/"></script>
+      <script>
+        function validateForm(data) {
+          let errors = []
+  
+          if (data.first_name === '') {
+              errors.push('First name is empty')
+          }
+  
+          if (data.last_name === '') {
+              errors.push('Last name is empty')
+          }
+  
+          if (data.email === '') {
+              errors.push('Email is empty')
+          }
+  
+          if (data.phone === '') {
+              errors.push('Phone is empty')
+          }
+  
+          if (data.adress === '') {
+              errors.push('Address is empty')
+          }
+  
+          if (data.zipcode === '') {
+              errors.push('Zipcode is empty')
+          }
+  
+          if (data.place === '') {
+              errors.push('Place is empty')
+          }
+  
+          return errors
+      }
+  
+      function buy(event) {
+          event.preventDefault()
+  
+          let data = {
+              'first_name': document.querySelector('input[name=first_name]').value,
+              'last_name': document.querySelector('input[name=last_name]').value,
+              'email': document.querySelector('input[name=email]').value,
+              'phone': document.querySelector('input[name=phone]').value,
+              'adress': document.querySelector('input[name=adress]').value,
+              'zipcode': document.querySelector('input[name=zipcode]').value,
+              'place': document.querySelector('input[name=place]').value,
+          }
+  
+          let errors = validateForm(data)
+  
+          if (errors.length) {
+              console.log('Errors', errors)
+          } else {
+              var stripe = Stripe('{{ pub_key }}')
+  
+              fetch('/order/start_order/', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'X-CSRFToken': '{{ csrf_token }}'
+                  },
+                  credentials: 'same-origin',
+                  body: JSON.stringify(data)
+              })
+              .then(function(response) {
+                  return response.json()
+              })
+              .then(function(session) {
+                  return stripe.redirectToCheckout({ sessionId: session.session.id })
+              })
+              .then(function(result) {
+                  if (result.error) {
+                      alert(result.error.message)
+                  }
+              })
+              .catch(function(error) {
+                  console.log('Errors', error)
+              })
+          }
+  
+          return false
+      }
+      </script>
+  {% endblock scripts %}
